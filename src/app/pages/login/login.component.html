@@ -1,0 +1,54 @@
+<div class="wrapper">
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 mx-auto card card-register">
+          <!-- Login Form -->
+          <ng-container>
+            <h3 class="title">Acessar</h3>
+            <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+              <label for="email">Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="nc-icon nc-email-85"></i>
+                  </span>
+                </div>
+                <input id="email" type="email" formControlName="email" class="form-control" placeholder="Email"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" autofocus="autofocus" />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors['required']">Email é obrigatório!</div>
+                </div>
+              </div>
+
+              <label for="password">Senha</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="nc-icon nc-key-25"></i>
+                  </span>
+                </div>
+                <input id="password" type="password" formControlName="password" class="form-control" placeholder="Senha"
+                  [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                  <div *ngIf="f['password'].errors['required']">Senha é obrigatório!</div>
+                </div>
+              </div>
+              <br>
+              <button [disabled]="loading" class="btn btn-danger w-100 btn-round">
+                <ng-container *ngIf="!loading">Acessar</ng-container>
+              </button>
+            </form>
+            <hr>
+            <div class="register">
+              <p>Não possui uma conta ? <a [routerLink]="'/register'" [routerLinkActive]="'active'"
+                  class="btn btn-outline btn-round btn-success btn-sm">Criar agora</a></p>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

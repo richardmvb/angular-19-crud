@@ -1,0 +1,8 @@
+:host ::ng-deep .iti {
+  display: block !important;
+  width: 100%;
+}
+
+:host ::ng-deep .country-dropdown {
+  z-index: 9999999 !important;
+}

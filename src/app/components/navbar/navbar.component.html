@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg fixed-top" color-on-scroll="500">
+  <div class="container">
+    <div class="navbar-translate">
+      <a class="navbar-brand" [routerLink]="['/home']">
+        {{ eventTitle }}
+      </a>
+      <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"
+        (click)="sidebarToggle()">
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+        <span class="navbar-toggler-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse" id="navbarToggler">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <span [routerLink]="['/login']" [routerLinkActive]="'active'" class="nav-link">Acessar</span>
+        </li>
+
+        <!-- Desktop -->
+        <li class="nav-item" *ngIf="!sidebarVisible && isLogged()">
+          <div class="btn-group nav-link" dropdown>
+            <span id="button-basic" dropdownToggle placement="bottom right" class="nav-link-green dropdown-toggle"
+              aria-controls="dropdown-basic">
+              <i aria-hidden="true" class="nc-icon nc-single-02"></i>
+              &nbsp; Meu perfil <span class="caret"></span>
+            </span>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+              <li role="menuitem">
+                <a class="dropdown-item" [routerLink]="['/account']" [routerLinkActive]="'active'"><i
+                    class="fa fa-edit"></i> &nbsp; Meus dados</a>
+              </li>
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem">
+                <a class="dropdown-item" [routerLink]="'.'" (click)="logout()"><i class="fa fa-sign-out"></i> &nbsp;
+                  Sair</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Mobile -->
+        <li class="nav-item" *ngIf="sidebarVisible && isLogged()">
+          <a [routerLink]="['/account/profile']" [routerLinkActive]="'active'" class="nav-link nav-link-green"><i
+              class="fa fa-edit"></i> &nbsp; Meus dados</a>
+        </li>
+        <li class="nav-item" *ngIf="sidebarVisible && isLogged()">
+          <a [routerLink]="['/dashboard']" [routerLinkActive]="'active'" class="nav-link nav-link-green"><i
+              class="fa fa-line-chart"></i> &nbsp; Dashboard</a>
+        </li>
+        <li class="nav-item" *ngIf="
+                        sidebarVisible &&
+                        isLogged()
+                    ">
+          <a [routerLink]="['/management']" [routerLinkActive]="'active'" class="nav-link nav-link-green"><i
+              class="fa fa-gear"></i> &nbsp; Gerenciar</a>
+        </li>
+        <li class="nav-item" *ngIf="sidebarVisible && isLogged()">
+          <a [routerLink]="'.'" class="btn btn-danger btn-round" (click)="logout()"><i class="fa fa-sign-out"></i>
+            &nbsp; Sair</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,140 @@
+<div class="wrapper">
+  <div class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 mx-auto card card-register">
+          <!-- Register Form -->
+          <div class="login">
+            <p>
+              Já possui uma conta ?
+              <a [routerLink]="'/login'" [routerLinkActive]="'active'"
+                class="btn btn-outline btn-round btn-success btn-sm">Iniciar Sessão</a>
+            </p>
+            <hr />
+          </div>
+
+          <h3 class="title">Cadastrar</h3>
+          <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="first_name">Primeiro Nome</label>
+              <input class="form-control" placeholder="Primeiro Nome" formControlName="first_name" type="text"
+                minlength="3" maxlength="20" [ngClass]="{
+                                  'is-invalid':
+                                      submitted && f['first_name'].errors
+                              }" autofocus />
+              <div *ngIf="submitted && f['first_name'].errors" class="invalid-feedback">
+                <div *ngIf="f['first_name'].errors['required']">
+                  Primeiro Nome é obrigatório!
+                </div>
+                <div *ngIf="f['first_name'].errors['minlength']">
+                  Tamanho mínimo de 3 caracteres
+                </div>
+                <div *ngIf="f['first_name'].errors['maxlength']">
+                  Tamanho máximo de 20 caracteres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="last_name">Úlltimo Nome</label>
+              <input class="form-control" placeholder="Último Nome" formControlName="last_name" type="text"
+                minlength="3" maxlength="20" [ngClass]="{
+                                  'is-invalid':
+                                      submitted && f['last_name'].errors
+                              }" />
+              <div *ngIf="submitted && f['last_name'].errors" class="invalid-feedback">
+                <div *ngIf="f['last_name'].errors['required']">
+                  Úlltimo Nome é obrigatório!
+                </div>
+                <div *ngIf="f['last_name'].errors['minlength']">
+                  Tamanho mínimo de 3 caracteres
+                </div>
+                <div *ngIf="f['last_name'].errors['maxlength']">
+                  Tamanho máximo de 20 caracteres
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input class="form-control" placeholder="E-mail" formControlName="email" type="email" minlength="5"
+                maxlength="50" pattern="^([A-Za-z0-9._-]{2,})(@[A-Za-z0-9_-]{2,})(\.[A-Za-z]{2,6})+$" [ngClass]="{
+                                  'is-invalid':
+                                      (submitted && f['email'].errors)
+                              }" />
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">
+                  E-mail é obrigatório!
+                </div>
+                <div *ngIf="f['email'].errors['minlength']">
+                  Tamanho mínimo de 5 caracteres
+                </div>
+                <div *ngIf="f['email'].errors['maxlength']">
+                  Tamanho máximo de 50 caracteres
+                </div>
+                <div *ngIf="f['email'].errors['pattern']">
+                  E-mail inválido
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="document_number">CPF</label>
+              <input appCpfValidator [dropSpecialCharacters]="true" mask="000.000.000-00" class="form-control"
+                placeholder="CPF" formControlName="document_number" type="text" [ngClass]="{
+                                  'is-invalid':
+                                      (submitted &&
+                                          f['document_number'].errors)
+                              }" />
+              <div *ngIf="submitted && f['document_number'].errors" class="invalid-feedback">
+                <div *ngIf="f['document_number'].errors['required']">
+                  CPF é obrigatório!
+                </div>
+                <div *ngIf="f['document_number'].errors['maxlength']">
+                  Tamanho máximo de 14 caracteres
+                </div>
+                <div *ngIf="f['document_number'].errors['cpfInvalid']">
+                  CPF inválido
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Senha</label>
+              <input class="form-control" placeholder="Senha" formControlName="password" type="password" minlength="6"
+                maxlength="30" [ngClass]="{
+                                  'is-invalid': submitted && f['password'].errors
+                              }" />
+              <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                <div *ngIf="f['password'].errors['required']">
+                  Senha é obrigatório!
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm_password">Repetir senha</label>
+              <input class="form-control" placeholder="Confirmar senha" formControlName="confirm_password"
+                type="password" [ngClass]="{
+                                  'is-invalid':
+                                      f['password'].value !==
+                                      f['confirm_password'].value
+                              }" />
+              <div *ngIf="
+                                  f['password'].value !==
+                                  f['confirm_password'].value
+                              " class="invalid-feedback">
+                As senhas não indenticas!
+              </div>
+            </div>
+
+            <br />
+            <button [disabled]="loading" class="btn btn-danger w-100 btn-round">
+              Cadastrar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
